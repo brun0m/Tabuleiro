@@ -1,13 +1,24 @@
 package jogo;
 
+import java.util.Random;
 
 public class Jogador extends Pinos {
 	private String tipo;
 	private int rodadas;
 	
-	public Jogador(String cor, String tipo) {
+	public Jogador(String cor) {
 		super(cor);
-		this.setTipo(tipo);
+		this.rodadas = 0;
+		Random a1 = new Random();
+		int valor = a1.nextInt(3);
+		switch(valor) {
+			case 0:
+				this.setTipo("Sortudo");
+			case 1:
+				this.setTipo("Azarado");
+			case 2:
+				this.setTipo("Normal");
+		}
 	}
 	
 
@@ -31,7 +42,8 @@ public class Jogador extends Pinos {
 
 	@Override
 	public String toString() {
-		return "Jogador [tipo=" + tipo + ", cor=" + cor + ", casa=" + casa + "]";
+		return "Jogador [tipo=" + tipo + ", cor=" + cor + ", casa=" + casa + 
+				", rodadas=" + rodadas + "]";
 	}
 	
 	
