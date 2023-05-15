@@ -29,6 +29,11 @@ public class Principal {
 		d.jogarDados(j[1]);
 		d.jogarDados(j[2]);
 		d.jogarDados(j[3]);
+		
+		d.jogarDados(j[0]);
+		d.jogarDados(j[1]);
+		d.jogarDados(j[2]);
+		d.jogarDados(j[3]);
 	}
 
 }

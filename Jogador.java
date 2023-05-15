@@ -14,10 +14,13 @@ public class Jogador extends Pinos {
 		switch(valor) {
 			case 0:
 				this.setTipo("Sortudo");
+				break;
 			case 1:
 				this.setTipo("Azarado");
+				break;
 			case 2:
 				this.setTipo("Normal");
+				break;
 		}
 	}
 	

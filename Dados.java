@@ -49,6 +49,7 @@ public class Dados {
 						Jogando.get(i).setRodadas(Jogando.get(i).getRodadas() + 1);
 						contaJogadas++;
 						CasasEspeciais(i);
+						verificarRodada(i);
 					} else if(Jogando.get(i).getTipo().equals("Normal")) {
 						Random a1 = new Random();
 						Random a2 = new Random();
@@ -59,6 +60,7 @@ public class Dados {
 						Jogando.get(i).setRodadas(Jogando.get(i).getRodadas() + 1);
 						contaJogadas++;
 						CasasEspeciais(i);
+						verificarRodada(i);
 					} else {
 						soma = 8;
 						while(soma > 7) {
@@ -72,6 +74,7 @@ public class Dados {
 						Jogando.get(i).setRodadas(Jogando.get(i).getRodadas() + 1);
 						contaJogadas++;
 						CasasEspeciais(i);
+						verificarRodada(i);
 					}
 				}
 				else if(Jogando.get(i).getSemjogar() > 0 
@@ -79,7 +82,10 @@ public class Dados {
 					System.out.println("Jogador " + Jogando.get(i).getCor() + " ficará " +
 							Jogando.get(i).getSemjogar() + 
 							" rodada(s) sem jogar, rodada pulada!");
+					Jogando.get(i).setRodadas(Jogando.get(i).getRodadas() + 1);
+					contaJogadas++;
 					CasasEspeciais(i);
+					verificarRodada(i);
 				}
 			}
 		}
@@ -138,13 +144,20 @@ public class Dados {
 			switch(res) {
 				case 0:
 					Jogando.get(i).setTipo("Sortudo");
+					System.out.println("O tipo do jogador " + Jogando.get(i).getCor() + 
+							" foi alterado pra " + Jogando.get(i).getTipo());
+					break;
 				case 1:
 					Jogando.get(i).setTipo("Normal");
+					System.out.println("O tipo do jogador " + Jogando.get(i).getCor() + 
+							" foi alterado pra " + Jogando.get(i).getTipo());
+					break;
 				case 2:
 					Jogando.get(i).setTipo("Azarado");
+					System.out.println("O tipo do jogador " + Jogando.get(i).getCor() + 
+							" foi alterado pra " + Jogando.get(i).getTipo());
+					break;
 			}
-			System.out.println("O tipo do jogador " + Jogando.get(i).getCor() + 
-					" foi alterado pra " + Jogando.get(i).getTipo());
 		}
 		
 		else if(Jogando.get(i).getCasa() == 5 || Jogando.get(i).getCasa() == 15 
@@ -161,9 +174,16 @@ public class Dados {
 		}
 		
 		else if(Jogando.get(i).getCasa() == 17 || Jogando.get(i).getCasa() == 27) {
+			System.out.println("O jogador da cor " + Jogando.get(i).getCor() + 
+					"parou na casa " + Jogando.get(i).getCasa());
 			System.out.println("Escolha a cor de um competidor "
-					+ "para voltar ao início");
-			System.out.println("Digite com inicial maiúscula");
+					+ "para voltar ao início(Digite com inicial maiúscula");
+			System.out.println("--------------------STATUS DA PARTIDA"
+					+ "--------------------");
+			for(int l = 0; l < Jogando.size(); l++) {
+				System.out.println(Jogando.get(l).toString());		
+			}
+			System.out.println("");
 			tom = new Scanner(System.in);
 			String c = tom.nextLine();
 			voltandoInicio(c);
@@ -180,18 +200,24 @@ public class Dados {
 			System.out.println("Resetando...");
 			//Comando pra resetar tudo e mostrar relatorio
 		}
+		
+		
+	}
+	
+	protected void verificarRodada(int i) {
 		if (valor == valor2) {
 			System.out.println("Valores iguais! O jogador da cor " 
 		+ Jogando.get(i).getCor() + " jogará novamente!");
 			jogarNovamente(i);
 		}
 		
-		if(contaJogadas % this.getContador() == 0) {
-			System.out.println("--------DADOS " + contaJogadas/this.getContador() 
-					+ " rodada--------");
+		else if(contaJogadas % this.getContador() == 0) {
+			System.out.println("------------------DADOS " + contaJogadas/this.getContador() 
+					+ " rodada------------------");
 			for(int l = 0; l < Jogando.size(); l++) {
 				System.out.println(Jogando.get(l).toString());		
 			}
+			System.out.println(" ");
 		}
 	}
 	
@@ -201,7 +227,7 @@ public class Dados {
 			if(Jogando.get(i).getCor().equals(n)) {
 				somador++;
 				Jogando.get(i).setCasa(0);
-				System.out.println("O jogador da cor" + n + "voltou para o início");
+				System.out.println("O jogador da cor " + n + " voltou para o início");
 			}
 		}
 		if(somador == 0) {
@@ -222,7 +248,7 @@ public class Dados {
 		}
 		if(menor == 40) {
 			System.out.println("O jogador da cor " + Jogando.get(i).getCor() +
-					" já está na última colocação, então não trocará com ninguém!");	
+					" já está na última colocação, então não trocará com ninguém!");
 		} else {
 			Jogando.get(pos).setCasa(Jogando.get(i).getCasa());
 			Jogando.get(i).setCasa(menor);
